@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:daily_expenses_app/chart.dart';
 import 'package:daily_expenses_app/new_transaction.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import './transaction_list.dart';
@@ -70,54 +72,78 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
-      backgroundColor: Theme.of(context).primaryColorDark,
-      title: Text(
-        "Daily Expenses",
-        style: TextStyle(
-          color: Colors.white,
-        ),
-      ),
-      actions: [
-        IconButton(
-          color: Colors.white,
-          icon: Icon(Icons.add),
-          onPressed: () => startAddNewTransaction(context),
-        )
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text(
+              "Daily Expenses",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(CupertinoIcons.add),
+                  onTap: () => startAddNewTransaction(context),
+                )
+              ],
+            ),
+          )
+        : AppBar(
+            backgroundColor: Theme.of(context).primaryColorDark,
+            title: Text(
+              "Daily Expenses",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            actions: [
+              IconButton(
+                color: Colors.white,
+                icon: Icon(Icons.add),
+                onPressed: () => startAddNewTransaction(context),
+              )
+            ],
+          );
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: appBar,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.25,
-                child: Chart(transactionbox)),
-            FutureBuilder(
-              future: Hive.openBox<Transaction>('tran'),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return Text(snapshot.error.toString());
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  height: (MediaQuery.of(context).size.height -
+                          appBar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.25,
+                  child: Chart(transactionbox),
+                ),
+              ),
+              FutureBuilder(
+                future: Hive.openBox<Transaction>('tran'),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    } else
+                      return Container(
+                          height: (MediaQuery.of(context).size.height -
+                                  appBar.preferredSize.height -
+                                  MediaQuery.of(context).padding.top) *
+                              0.70,
+                          child: TransactionList(
+                              transactionbox, deletetransaction));
                   } else
-                    return Container(
-                        height: (MediaQuery.of(context).size.height -
-                                appBar.preferredSize.height -
-                                MediaQuery.of(context).padding.top) *
-                            0.70,
-                        child:
-                            TransactionList(transactionbox, deletetransaction));
-                } else
-                  return Text('Loading');
-              },
-            )
-          ],
+                    return Text('Loading');
+                },
+              )
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

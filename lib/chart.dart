@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class Chart extends StatelessWidget {
   final Box<Transaction> transactionbox;
   Chart(this.transactionbox);
-
+  bool month = false;
   List<Transaction> get allTransactions {
     return List.generate(transactionbox.length, (index) {
       return transactionbox.getAt(index);
@@ -15,31 +15,37 @@ class Chart extends StatelessWidget {
   }
 
   List<Transaction> get recentTransactions {
-    return allTransactions.where((tx) {
-      return tx.date.isAfter(
-        DateTime.now().subtract(
-          Duration(days: 7),
-        ),
-      );
-    }).toList();
+    if (month == true) {
+    } else {
+      return allTransactions.where((tx) {
+        return tx.date.isAfter(
+          DateTime.now().subtract(
+            Duration(days: 7),
+          ),
+        );
+      }).toList();
+    }
   }
 
   List<Map<String, Object>> get groupedTransactionValues {
-    return List.generate(7, (index) {
-      final weekDay = DateTime.now().subtract(Duration(days: index));
-      double totalSum = 0.0;
-      for (var i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
-          totalSum += recentTransactions[i].amount;
+    if (month == true) {
+    } else {
+      return List.generate(7, (index) {
+        final weekDay = DateTime.now().subtract(Duration(days: index));
+        double totalSum = 0.0;
+        for (var i = 0; i < recentTransactions.length; i++) {
+          if (recentTransactions[i].date.day == weekDay.day &&
+              recentTransactions[i].date.month == weekDay.month &&
+              recentTransactions[i].date.year == weekDay.year) {
+            totalSum += recentTransactions[i].amount;
+          }
         }
-      }
-      return {
-        'day': DateFormat.E().format(weekDay).substring(0, 3),
-        'amount': totalSum
-      };
-    }).reversed.toList();
+        return {
+          'day': DateFormat.E().format(weekDay).substring(0, 3),
+          'amount': totalSum
+        };
+      }).reversed.toList();
+    }
   }
 
   double get totalSpending {
