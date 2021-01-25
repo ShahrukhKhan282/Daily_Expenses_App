@@ -13,10 +13,12 @@ class ChartBar extends StatelessWidget {
         SizedBox(
           height: 4,
         ),
-        Text(
-          '₹${spendingAmount.toStringAsFixed(0)}',
-          style: TextStyle(
-            color: Colors.white,
+        FittedBox(
+          child: Text(
+            '₹${spendingAmount.toStringAsFixed(0)}',
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
         SizedBox(
