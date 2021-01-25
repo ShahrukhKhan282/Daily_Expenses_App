@@ -30,7 +30,7 @@ class TransactionList extends StatelessWidget {
                 int len = transactionbox.length;
                 final todo = transactionbox.getAt(len - index - 1);
                 return Card(
-                  color: Colors.grey[800],
+                  color: Colors.grey[850],
                   shadowColor: Colors.black,
                   elevation: 10,
                   margin: EdgeInsets.symmetric(
@@ -46,6 +46,7 @@ class TransactionList extends StatelessWidget {
                         child: Text(
                           "₹" + todo.amount.toStringAsFixed(0),
                           style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.green,
                           ),

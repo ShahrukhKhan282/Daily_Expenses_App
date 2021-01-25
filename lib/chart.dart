@@ -57,7 +57,7 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.grey[800],
+      color: Colors.grey[850],
       elevation: 10,
       shadowColor: Colors.black,
       margin: EdgeInsets.all(10),

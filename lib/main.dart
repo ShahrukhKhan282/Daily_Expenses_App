@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
+            backgroundColor: Colors.grey[900],
             middle: Text(
               "Daily Expenses",
               style: TextStyle(
@@ -84,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  child: Icon(CupertinoIcons.add),
+                  child: Icon(
+                    CupertinoIcons.add,
+                    color: Colors.white,
+                  ),
                   onTap: () => startAddNewTransaction(context),
                 )
               ],
@@ -107,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           );
     return Scaffold(
-      backgroundColor: Colors.grey[850],
+      backgroundColor: Colors.grey[900],
       appBar: appBar,
       body: SafeArea(
         child: SingleChildScrollView(
