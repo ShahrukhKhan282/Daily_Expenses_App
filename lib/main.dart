@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
         : AppBar(
-            backgroundColor: Theme.of(context).primaryColorDark,
+            backgroundColor: Colors.grey[900],
             title: Text(
               "Daily Expenses",
               style: TextStyle(
