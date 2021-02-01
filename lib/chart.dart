@@ -54,7 +54,7 @@ class Chart extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => MonthChart(),
+          builder: (context) => MonthChart(allTransactions),
         ),
       ),
       child: Card(
