@@ -1,4 +1,5 @@
 import 'package:daily_expenses_app/chart_bar.dart';
+import 'package:daily_expenses_app/month_chart.dart';
 import 'package:daily_expenses_app/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -15,37 +16,31 @@ class Chart extends StatelessWidget {
   }
 
   List<Transaction> get recentTransactions {
-    if (month == true) {
-    } else {
-      return allTransactions.where((tx) {
-        return tx.date.isAfter(
-          DateTime.now().subtract(
-            Duration(days: 7),
-          ),
-        );
-      }).toList();
-    }
+    return allTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
   }
 
   List<Map<String, Object>> get groupedTransactionValues {
-    if (month == true) {
-    } else {
-      return List.generate(7, (index) {
-        final weekDay = DateTime.now().subtract(Duration(days: index));
-        double totalSum = 0.0;
-        for (var i = 0; i < recentTransactions.length; i++) {
-          if (recentTransactions[i].date.day == weekDay.day &&
-              recentTransactions[i].date.month == weekDay.month &&
-              recentTransactions[i].date.year == weekDay.year) {
-            totalSum += recentTransactions[i].amount;
-          }
+    return List.generate(7, (index) {
+      final weekDay = DateTime.now().subtract(Duration(days: index));
+      double totalSum = 0.0;
+      for (var i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalSum += recentTransactions[i].amount;
         }
-        return {
-          'day': DateFormat.E().format(weekDay).substring(0, 3),
-          'amount': totalSum
-        };
-      }).reversed.toList();
-    }
+      }
+      return {
+        'day': DateFormat.E().format(weekDay).substring(0, 3),
+        'amount': totalSum
+      };
+    }).reversed.toList();
   }
 
   double get totalSpending {
@@ -56,25 +51,32 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.grey[850],
-      elevation: 10,
-      shadowColor: Colors.black,
-      margin: EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: groupedTransactionValues.map((data) {
-          return Flexible(
-            fit: FlexFit.tight,
-            child: ChartBar(
-              data['day'],
-              data['amount'],
-              totalSpending == 0.0
-                  ? 0.0
-                  : (data['amount'] as double) / totalSpending,
-            ),
-          );
-        }).toList(),
+    return InkWell(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => MonthChart(),
+        ),
+      ),
+      child: Card(
+        color: Colors.grey[850],
+        elevation: 10,
+        shadowColor: Colors.black,
+        margin: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                data['day'],
+                data['amount'],
+                totalSpending == 0.0
+                    ? 0.0
+                    : (data['amount'] as double) / totalSpending,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
