@@ -29,14 +29,14 @@ class MonthChart extends StatelessWidget {
 
     List<Object> tempmonth = [];
     List<double> tempsum = [];
-    print("temp1:" + temp.toString());
+
     for (var i = 0; i < allTransactions.length; i++) {
       if (allTransactions.elementAt(i).date.month != temp) {
         length++;
         temp = allTransactions.elementAt(i).date.month;
       }
     }
-    print("lenght:" + length.toString());
+
     temp = allTransactions.first.date.month;
 
     for (var i = 0; i < length; i++) {
@@ -51,7 +51,7 @@ class MonthChart extends StatelessWidget {
       }
       tempmonth.add(date);
       tempsum.add(sum);
-      print("temp2:" + temp.toString());
+      print(allTransactions[i].date.toString());
       temp = allTransactions[i].date.month;
     }
 
