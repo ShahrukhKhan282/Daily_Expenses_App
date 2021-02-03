@@ -13,17 +13,21 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
       child: transactionbox.isEmpty
-          ? Column(
-              children: [
-                Text(
-                  "No Transactions Added Yet!",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    "No Transactions Added Yet!",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                Image.asset('assets/images/empty.png')
-              ],
+                  Image.asset(
+                    'assets/images/empty.png',
+                  ),
+                ],
+              ),
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
