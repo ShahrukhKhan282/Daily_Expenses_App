@@ -48,8 +48,24 @@ class TransactionList extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return CupertinoAlertDialog(
-                                  title: Text("data"),
-                                  content: Text("content"),
+                                  title: Text(todo.title),
+                                  content: Container(
+                                    height: 60,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Divider(
+                                          color: Colors.black,
+                                        ),
+                                        Text("Amount: " +
+                                            todo.amount.toString()),
+                                        Text("Added: " +
+                                            DateFormat.yMMMd()
+                                                .format(todo.date)),
+                                      ],
+                                    ),
+                                  ),
                                   actions: [
                                     FlatButton(
                                       onPressed: () {
@@ -65,8 +81,24 @@ class TransactionList extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text("data"),
-                                  content: Text("content"),
+                                  title: Text(todo.title),
+                                  content: Container(
+                                    height: 60,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Divider(
+                                          color: Colors.black,
+                                        ),
+                                        Text("Amount: " +
+                                            todo.amount.toString()),
+                                        Text("Added: " +
+                                            DateFormat.yMMMd()
+                                                .format(todo.date)),
+                                      ],
+                                    ),
+                                  ),
                                   actions: [
                                     FlatButton(
                                       onPressed: () {
