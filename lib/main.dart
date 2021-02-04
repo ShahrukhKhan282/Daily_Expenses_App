@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         transactionbox.deleteAt(index);
                       });
                       Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      Scaffold.of(context).showSnackBar(
                           SnackBar(content: Text("Transaction removed")));
                     },
                     child: Text("Yes"),
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         transactionbox.deleteAt(index);
                       });
                       Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      Scaffold.of(context).showSnackBar(
                           SnackBar(content: Text("Transaction removed")));
                     },
                     child: Text("Yes"),

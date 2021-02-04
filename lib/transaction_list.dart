@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -40,7 +43,41 @@ class TransactionList extends StatelessWidget {
                       deleteTransaction(len - index - 1),
                   child: InkWell(
                     onTap: () {
-                      //showdialo(context: context,)
+                      Platform.isIOS
+                          ? showCupertinoDialog(
+                              context: context,
+                              builder: (context) {
+                                return CupertinoAlertDialog(
+                                  title: Text("data"),
+                                  content: Text("content"),
+                                  actions: [
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            )
+                          : showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("data"),
+                                  content: Text("content"),
+                                  actions: [
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                     },
                     child: Card(
                       color: Colors.grey[850],
