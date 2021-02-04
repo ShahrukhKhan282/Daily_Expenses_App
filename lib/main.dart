@@ -65,11 +65,64 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void deletetransaction(index) {
-    setState(() {
-      transactionbox.deleteAt(index);
-    });
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Transaction removed")));
+    Platform.isIOS
+        ? showCupertinoDialog(
+            context: context,
+            builder: (context) {
+              return CupertinoAlertDialog(
+                title: Text("Deleting Transaction..."),
+                content: Text("Are you sure?"),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      setState(() {
+                        transactionbox.deleteAt(index);
+                      });
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Transaction removed")));
+                    },
+                    child: Text("Yes"),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      setState(() {});
+                    },
+                    child: Text("No"),
+                  ),
+                ],
+              );
+            })
+        : showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Deleting Transaction..."),
+                content: Text("Are you sure?"),
+                actions: [
+                  FlatButton(
+                    onPressed: () {
+                      setState(() {
+                        transactionbox.deleteAt(index);
+                      });
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Transaction removed")));
+                    },
+                    child: Text("Yes"),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      setState(() {});
+                    },
+                    child: Text("No"),
+                  ),
+                ],
+              );
+            },
+          );
   }
 
   @override

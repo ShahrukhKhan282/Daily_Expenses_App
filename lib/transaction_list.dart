@@ -38,47 +38,52 @@ class TransactionList extends StatelessWidget {
                   background: Container(color: Colors.red),
                   onDismissed: (direction) =>
                       deleteTransaction(len - index - 1),
-                  child: Card(
-                    color: Colors.grey[850],
-                    shadowColor: Colors.black,
-                    elevation: 10,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 2,
-                    ),
-                    child: ListTile(
-                      leading: Container(
-                        padding: EdgeInsets.symmetric(vertical: 7),
-                        width: 70,
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            "₹" + todo.amount.toStringAsFixed(0),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.green,
+                  child: InkWell(
+                    onTap: () {
+                      //showdialo(context: context,)
+                    },
+                    child: Card(
+                      color: Colors.grey[850],
+                      shadowColor: Colors.black,
+                      elevation: 10,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 2,
+                      ),
+                      child: ListTile(
+                        leading: Container(
+                          padding: EdgeInsets.symmetric(vertical: 7),
+                          width: 70,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "₹" + todo.amount.toStringAsFixed(0),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.green,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      title: Text(
-                        todo.title,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                        title: Text(
+                          todo.title,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      subtitle: Text(
-                        DateFormat.yMMMd().format(todo.date),
-                        style: TextStyle(
-                          color: Colors.white54,
+                        subtitle: Text(
+                          DateFormat.yMMMd().format(todo.date),
+                          style: TextStyle(
+                            color: Colors.white54,
+                          ),
                         ),
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        color: Colors.red,
-                        onPressed: () => deleteTransaction(len - index - 1),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          color: Colors.red,
+                          onPressed: () => deleteTransaction(len - index - 1),
+                        ),
                       ),
                     ),
                   ),
