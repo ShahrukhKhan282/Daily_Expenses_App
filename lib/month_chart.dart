@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:daily_expenses_app/transaction.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -47,10 +50,20 @@ class MonthChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        title: Text("Monthly Chart"),
-      ),
+      appBar: Platform.isIOS
+          ? CupertinoNavigationBar(
+              backgroundColor: Colors.grey[900],
+              middle: Text(
+                "Monthly Graph",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : AppBar(
+              backgroundColor: Colors.grey[900],
+              title: Text("Monthly Graph"),
+            ),
       body: allTransactions.isEmpty
           ? SingleChildScrollView(
               child: Column(

@@ -68,6 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       transactionbox.deleteAt(index);
     });
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Transaction removed")));
   }
 
   @override
