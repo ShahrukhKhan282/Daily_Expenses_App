@@ -52,7 +52,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     Text(dateNow == null
                         ? 'No Date Choosen'
                         : DateFormat.yMMMd().format(dateNow)),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         showDatePicker(
                                 context: context,

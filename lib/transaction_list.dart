@@ -67,7 +67,7 @@ class TransactionList extends StatelessWidget {
                                     ),
                                   ),
                                   actions: [
-                                    FlatButton(
+                                    TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
@@ -100,7 +100,7 @@ class TransactionList extends StatelessWidget {
                                     ),
                                   ),
                                   actions: [
-                                    FlatButton(
+                                    TextButton(
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },

@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text("Deleting Transaction..."),
                 content: Text("Are you sure?"),
                 actions: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       setState(() {
                         transactionbox.deleteAt(index);
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text("Yes"),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       setState(() {});
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text("Deleting Transaction..."),
                 content: Text("Are you sure?"),
                 actions: [
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       setState(() {
                         transactionbox.deleteAt(index);
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: Text("Yes"),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       setState(() {});
