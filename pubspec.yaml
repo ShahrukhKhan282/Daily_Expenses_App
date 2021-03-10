@@ -28,6 +28,7 @@ dependencies:
   hive_flutter: ^0.3.1
   path_provider: any
   cupertino_icons: ^1.0.0
+  change_app_package_name: ^0.1.2
   
 
 

@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 class Chart extends StatelessWidget {
   final Box<Transaction> transactionbox;
   Chart(this.transactionbox);
-  bool month = false;
   List<Transaction> get allTransactions {
     return List.generate(transactionbox.length, (index) {
       return transactionbox.getAt(index);

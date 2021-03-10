@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:daily_expenses_app/day_chart.dart';
 import 'package:daily_expenses_app/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -86,53 +87,62 @@ class MonthChart extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: (context, i) {
-                return Card(
-                  color: Colors.grey[900],
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black38, width: 1.0),
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.grey[850],
+                return InkWell(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DayChart(
+                          allTransactions, monthlytransactions[i]['month']),
+                    ),
+                  ),
+                  child: Card(
+                    color: Colors.grey[900],
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.black38, width: 1.0),
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey[850],
+                          ),
+                          child: ListTile(
+                            trailing: Text(
+                              monthlytransactions[i]['month'],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
-                        child: ListTile(
-                          trailing: Text(
-                            monthlytransactions[i]['month'],
+                        Container(
+                          child: FractionallySizedBox(
+                            widthFactor:
+                                (monthlytransactions[i]['sum'] as double) /
+                                    totalSpending,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white12,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              height: 58,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 17),
+                          child: Text(
+                            '₹${(monthlytransactions[i]['sum'] as double).toStringAsFixed(0)}',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontSize: 20,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      Container(
-                        child: FractionallySizedBox(
-                          widthFactor:
-                              (monthlytransactions[i]['sum'] as double) /
-                                  totalSpending,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white12,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            height: 58,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 17),
-                        child: Text(
-                          '₹${(monthlytransactions[i]['sum'] as double).toStringAsFixed(0)}',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
