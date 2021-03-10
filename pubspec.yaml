@@ -24,10 +24,10 @@ dependencies:
   intl: ^0.16.1
   flutter:
     sdk: flutter
-  hive: ^1.4.4+1
-  hive_flutter: ^0.3.1
-  path_provider: any
+  hive: ^2.0.0
+  path_provider: ^2.0.1
   cupertino_icons: ^1.0.0
+  firebase_messaging: ^7.0.3
   
 
 
@@ -43,15 +43,8 @@ dev_dependencies:
     sdk: flutter
   #integration_test:
   #  sdk: flutter
-  hive_generator: ^0.8.2
+  hive_generator: ^1.0.0
   build_runner: 
-
-  flutter_launcher_icons: ^0.8.1
-
-flutter_icons:
-  image_path: 'assets/images/icon.png'
-  android: true
-  ios: true
 
 flutter_launcher_name:
   name: "Daily Expenses Planner"
